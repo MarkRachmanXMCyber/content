@@ -1,0 +1,307 @@
+id: SCCM - Test
+version: -1
+vcShouldKeepItemLegacyProdMachine: false
+name: SCCM - Test
+starttaskid: "0"
+tasks:
+  "0":
+    id: "0"
+    taskid: 001c1ebf-e01e-4e17-8a1d-5b58be0f11a9
+    type: start
+    task:
+      id: 001c1ebf-e01e-4e17-8a1d-5b58be0f11a9
+      version: -1
+      name: ""
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "8"
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "1":
+    id: "1"
+    taskid: dedfcc80-2a4b-4a27-8df2-033c4e70d25d
+    type: regular
+    task:
+      id: dedfcc80-2a4b-4a27-8df2-033c4e70d25d
+      version: -1
+      name: Get last logon user
+      description: Gets the last user that logged on to a given computer name
+      script: SCCM|||sccm-last-log-on-user
+      type: regular
+      iscommand: true
+      brand: SCCM
+    nexttasks:
+      '#none#':
+      - "2"
+    scriptarguments:
+      ComputerName:
+        simple: EC2AMAZ-2AKQ815
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 370
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "2":
+    id: "2"
+    taskid: 386cdbac-5cb2-4935-8c4f-671cfb28b330
+    type: condition
+    task:
+      id: 386cdbac-5cb2-4935-8c4f-671cfb28b330
+      version: -1
+      name: Validate last log on user
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      "yes":
+      - "3"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: SCCM.Computer
+            iscontext: true
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 545
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "3":
+    id: "3"
+    taskid: 62aecf9d-4202-4a37-8933-33dcea71c8df
+    type: regular
+    task:
+      id: 62aecf9d-4202-4a37-8933-33dcea71c8df
+      version: -1
+      name: Get Primary User
+      description: Get the primary user of a given computer name
+      script: SCCM|||sccm-get-primary-user
+      type: regular
+      iscommand: true
+      brand: SCCM
+    nexttasks:
+      '#none#':
+      - "4"
+    scriptarguments:
+      ComputerName:
+        simple: EC2AMAZ-2AKQ815
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 720
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "4":
+    id: "4"
+    taskid: 3d22e9e3-69df-4709-848c-839f0b93763f
+    type: condition
+    task:
+      id: 3d22e9e3-69df-4709-848c-839f0b93763f
+      version: -1
+      name: Validate Primary User
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      "yes":
+      - "5"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: SCCM.PrimaryUsers
+            iscontext: true
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 895
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "5":
+    id: "5"
+    taskid: 283c0fa2-a334-49df-8161-3952c31625c9
+    type: regular
+    task:
+      id: 283c0fa2-a334-49df-8161-3952c31625c9
+      version: -1
+      name: Get installed softwares
+      description: Gets installed softwares on a given computer name
+      script: SCCM|||sccm-get-installed-softwares
+      type: regular
+      iscommand: true
+      brand: SCCM
+    nexttasks:
+      '#none#':
+      - "6"
+    scriptarguments:
+      ComputerName:
+        simple: EC2AMAZ-2AKQ815
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1070
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "6":
+    id: "6"
+    taskid: c39c2709-40f5-4528-86b3-b4c12803598b
+    type: condition
+    task:
+      id: c39c2709-40f5-4528-86b3-b4c12803598b
+      version: -1
+      name: Validate installed softwares
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      "yes":
+      - "7"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              simple: SCCM.InstalledSoftwares
+            iscontext: true
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1245
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "7":
+    id: "7"
+    taskid: 2001e49c-a950-4f40-8903-b1b72af7037d
+    type: title
+    task:
+      id: 2001e49c-a950-4f40-8903-b1b72af7037d
+      version: -1
+      name: Finished successfully
+      type: title
+      iscommand: false
+      brand: ""
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1420
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+  "8":
+    id: "8"
+    taskid: 5096c844-243f-46d2-8607-b3781332251c
+    type: regular
+    task:
+      id: 5096c844-243f-46d2-8607-b3781332251c
+      version: -1
+      name: Delete context
+      description: Delete field from context
+      scriptName: DeleteContext
+      type: regular
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#none#':
+      - "1"
+    scriptarguments:
+      all:
+        simple: "yes"
+      index: {}
+      key: {}
+      keysToKeep: {}
+      subplaybook: {}
+    separatecontext: false
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 195
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+    skipunavailable: false
+    quietmode: 0
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1435,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
+inputs: []
+outputs: []
