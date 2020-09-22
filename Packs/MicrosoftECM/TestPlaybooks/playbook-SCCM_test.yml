@@ -1,6 +1,5 @@
 id: SCCM - Test
 version: -1
-vcShouldKeepItemLegacyProdMachine: false
 name: SCCM - Test
 starttaskid: "0"
 tasks:
@@ -14,6 +13,7 @@ tasks:
       name: ""
       iscommand: false
       brand: ""
+      description: ''
     nexttasks:
       '#none#':
       - "8"
@@ -242,6 +242,7 @@ tasks:
       type: title
       iscommand: false
       brand: ""
+      description: ''
     separatecontext: false
     view: |-
       {
@@ -305,3 +306,5 @@ view: |-
   }
 inputs: []
 outputs: []
+fromversion: 5.5.0
+description: TODO

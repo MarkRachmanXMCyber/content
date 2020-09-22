@@ -1,6 +1,6 @@
 {
-    "name": "SCCM",
-    "description": "SCCM",
+    "name": "MicrosoftECM",
+    "description": "MicrosoftECM",
     "support": "xsoar",
     "currentVersion": "1.0.0",
     "author": "Cortex XSOAR",
